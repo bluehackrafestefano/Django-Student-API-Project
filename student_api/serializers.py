@@ -2,10 +2,6 @@ from rest_framework import serializers
 from .models import Student, Path
 from django.utils.timezone import now
 
-class PathSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Path
-        fields = ["id", "path_name"]
 
 class StudentSerializer(serializers.ModelSerializer):
     
@@ -24,3 +20,12 @@ class StudentSerializer(serializers.ModelSerializer):
         
     def get_days_since_joined(self, obj):
         return ((now() - obj.register_date).seconds) // 60
+    
+
+class PathSerializer(serializers.ModelSerializer):
+    
+    students = StudentSerializer(many=True)
+    
+    class Meta:
+        model = Path
+        fields = ["id", "path_name", "students"]
