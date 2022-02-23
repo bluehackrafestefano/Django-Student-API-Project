@@ -11,6 +11,7 @@ class StudentSerializer(serializers.ModelSerializer):
     
     days_since_joined = serializers.SerializerMethodField(label="a")
     minutes_since_joined = days_since_joined
+    path = serializers.StringRelatedField()
     
     class Meta:
         model = Student
