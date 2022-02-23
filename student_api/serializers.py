@@ -11,7 +11,11 @@ class StudentSerializer(serializers.ModelSerializer):
     
     days_since_joined = serializers.SerializerMethodField(label="a")
     minutes_since_joined = days_since_joined
+    # StringRelatedField() is by default read-only.
     path = serializers.StringRelatedField()
+    # to create a student with path, need to use path_id
+    # not to see the same thing on get method, make it write only
+    path_id = serializers.IntegerField(write_only=True)
     
     class Meta:
         model = Student
