@@ -23,8 +23,8 @@ class StudentSerializer(serializers.ModelSerializer):
     
 
 class PathSerializer(serializers.ModelSerializer):
-    
-    students = StudentSerializer(many=True)
+    students = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
+    # students = StudentSerializer(many=True)
     
     class Meta:
         model = Path
